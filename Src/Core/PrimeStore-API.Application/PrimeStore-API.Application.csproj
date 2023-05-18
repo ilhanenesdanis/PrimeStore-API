@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>PrimeStore_API.Application</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositorys\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PrimeStore-API.Domanin\PrimeStore-API.Domanin.csproj" />
+  </ItemGroup>
+
+</Project>
