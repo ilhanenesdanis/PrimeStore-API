@@ -509,7 +509,7 @@ namespace PrimeStore_API.Persistence.Migrations
                         column: x => x.OrderStatusId,
                         principalTable: "OrderStatus",
                         principalColumn: "Id");
-                    table.ForeignKey(""
+                    table.ForeignKey(
                         name: "FK_OrderHistories_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
