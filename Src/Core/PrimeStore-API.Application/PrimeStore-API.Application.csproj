@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositorys\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PrimeStore-API.Domanin\PrimeStore-API.Domanin.csproj" />
   </ItemGroup>
 
