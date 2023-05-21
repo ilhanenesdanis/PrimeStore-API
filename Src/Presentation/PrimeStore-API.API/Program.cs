@@ -1,4 +1,7 @@
 using PrimeStore_API.Persistence.IOC;
+using PrimeStore_API.Application.IOC;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,10 +11,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//serviceRegistration
+#region serviceRegistration
 builder.Services.AddPersistenceDependency(builder.Configuration);
+builder.Services.AddApplicationDependency();
+#endregion
+#region Serilog Configuration
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.MSSqlServer(connectionString: builder.Configuration.GetConnectionString("SqlConnection"),
+    tableName: "systemLog",
+    appConfiguration:builder.Configuration,
+    autoCreateSqlTable:true,
+    columnOptionsSection:builder.Configuration.GetSection("Serilog:ColumnOptions"),
+    schemaName:"dbo"
+    ).CreateLogger();
 
-
+builder.Host.UseSerilog(Log.Logger);
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,7 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseSerilogRequestLogging();
 app.UseAuthorization();
 
 app.MapControllers();

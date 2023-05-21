@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PrimeStore_API.Application.UnitOfWork;
 using System.Reflection;
 
 namespace PrimeStore_API.Persistence.IOC
@@ -15,7 +16,9 @@ namespace PrimeStore_API.Persistence.IOC
                     options.MigrationsAssembly(Assembly.GetAssembly(typeof(Persistence.Context.ApplicationContext)).GetName().Name);
                 })
             );
+            
 
+            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
         }
     }
 }
