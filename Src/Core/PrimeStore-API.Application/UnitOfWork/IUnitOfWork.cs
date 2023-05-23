@@ -14,5 +14,6 @@ namespace PrimeStore_API.Application.UnitOfWork
         #endregion
         int SaveChanges();
         Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

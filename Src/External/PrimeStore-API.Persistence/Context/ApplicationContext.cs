@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PrimeStore_API.Domanin.Entities;
+using PrimeStore_API.Domanin.Entities.BaseClass;
 using PrimeStore_API.Domanin.Entities.Identity;
 using System.Reflection;
 
@@ -29,6 +30,84 @@ namespace PrimeStore_API.Persistence.Context
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
+        }
+        private void ApplyEntityChanges()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity baseEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                baseEntity.IsEnabled = true;
+                                baseEntity.IsDeleted = false;
+                                baseEntity.CreateDate = DateTime.Now;
+                                baseEntity.Id = Guid.NewGuid();
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                baseEntity.UpdateDate = DateTime.Now;
+                                baseEntity.ModifiedUserId = "";
+                                break;
+                            }
+                        case EntityState.Deleted:
+                            {
+                                baseEntity.IsDeleted = true;
+                                baseEntity.ModifiedUserId = "";
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        private async Task ApplyEntityChangesAsync()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity baseEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                baseEntity.IsEnabled = true;
+                                baseEntity.IsDeleted = false;
+                                baseEntity.CreateDate = DateTime.Now;
+                                baseEntity.Id = Guid.NewGuid();
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                baseEntity.UpdateDate = DateTime.Now;
+                                baseEntity.ModifiedUserId = "";
+                                break;
+                            }
+                        case EntityState.Deleted:
+                            {
+                                baseEntity.IsDeleted = true;
+                                baseEntity.ModifiedUserId = "";
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        public override int SaveChanges()
+        {
+            ApplyEntityChanges();
+            return base.SaveChanges();
+        }
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            await ApplyEntityChangesAsync();
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

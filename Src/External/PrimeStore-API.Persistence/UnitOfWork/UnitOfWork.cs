@@ -37,5 +37,10 @@ namespace PrimeStore_API.Persistence.UnitOfWork
         {
             return await _context.SaveChangesAsync();
         }
+
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

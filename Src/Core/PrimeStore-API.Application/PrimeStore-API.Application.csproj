@@ -16,8 +16,4 @@
     <ProjectReference Include="..\PrimeStore-API.Domanin\PrimeStore-API.Domanin.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Queries\Brand\" />
-  </ItemGroup>
-
 </Project>

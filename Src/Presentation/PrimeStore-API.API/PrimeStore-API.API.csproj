@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\External\PrimeStore-API.Persistence\PrimeStore-API.Persistence.csproj" />
   </ItemGroup>
 
