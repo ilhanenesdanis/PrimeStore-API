@@ -12,16 +12,24 @@ namespace PrimeStore_API.Persistence.UnitOfWork
         private readonly ApplicationContext _context;
         private readonly IBrandReadRepository _brandReadRepository;
         private readonly IBrandWriteRepository _brandWriteRepository;
+        private readonly IColorReadRepository _colorReadRepository;
+        private readonly IColorWriteRepository _colorWriteRepository;
         public UnitOfWork(ApplicationContext context)
         {
             _context = context;
             _brandReadRepository=new BrandReadRepository(context);
             _brandWriteRepository=new BrandWriteRepository(context);
+            _colorReadRepository=new ColorReadRepository(context);
+            _colorWriteRepository=new ColorWriteRepository(context);
         }
 
         public IBrandReadRepository BrandReadRepository => _brandReadRepository;
 
         public IBrandWriteRepository BrandWriteRepository => _brandWriteRepository;
+
+        public IColorReadRepository ColorReadRepository => _colorReadRepository;
+
+        public IColorWriteRepository ColorWriteRepository => _colorWriteRepository;
 
         public void Dispose()
         {

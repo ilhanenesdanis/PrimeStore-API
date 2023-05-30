@@ -2,6 +2,8 @@ using PrimeStore_API.Persistence.IOC;
 using PrimeStore_API.Application.IOC;
 using Serilog;
 using PrimeStore_API.API.Middleware;
+using PrimeStore_API.Persistence.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
+
+builder.Services.Configure<ConnectionStringsOptions>(builder.Configuration.GetSection("ConnectionStrings"));
+
 #region serviceRegistration
 builder.Services.AddPersistenceDependency(builder.Configuration);
 builder.Services.AddApplicationDependency();

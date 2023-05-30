@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PrimeStore_API.Application.DTO;
 using PrimeStore_API.Application.Features.Command.Brand.CreateBrandCommand;
 using PrimeStore_API.Application.Features.Queries.Brand.GetAllBrandQueries;
 using PrimeStore_API.Application.RequestParameters;
@@ -22,14 +23,14 @@ namespace PrimeStore_API.API.Controllers
         public async Task<IActionResult> AddNewBrand(CreateBrandCommandRequest request)
         {
             var result = await _mediator.Send(request);
-            return Ok(result);
+            return CreateActionResult(ResultDTO<CreateBrandCommandRequest>.Success(200));
         }
         [Route("GetAllBrands")]
         [HttpGet]
         public async Task<IActionResult> GetAllBrand([FromQuery]Pagination pagination)
         {
             var result = await _mediator.Send(new GetAllBrandRequest() { Pagination = pagination });
-            return Ok(result);
+            return Ok(ResultDTO<IEnumerable<GetAllBrandResponse>>.Success(200,result));
         }
     }
 }

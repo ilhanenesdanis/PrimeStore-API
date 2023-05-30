@@ -1,7 +1,9 @@
-﻿using PrimeStore_API.Domanin.Entities.BaseClass;
+﻿using Dapper.Contrib.Extensions;
+using PrimeStore_API.Domanin.Entities.BaseClass;
 
 namespace PrimeStore_API.Domanin.Entities
 {
+    [Table("OrderHistories")]
     public class OrderHistory : BaseEntity
     {
         public Guid OrderId { get; set; }

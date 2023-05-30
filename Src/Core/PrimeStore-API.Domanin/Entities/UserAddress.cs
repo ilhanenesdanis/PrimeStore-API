@@ -1,8 +1,10 @@
-﻿using PrimeStore_API.Domanin.Entities.BaseClass;
+﻿using Dapper.Contrib.Extensions;
+using PrimeStore_API.Domanin.Entities.BaseClass;
 using PrimeStore_API.Domanin.Entities.Identity;
 
 namespace PrimeStore_API.Domanin.Entities
 {
+    [Table("UserAddress")]
     public class UserAddress : BaseEntity
     {
         public string AddressLineOne { get; set; }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PrimeStore_API.Application.Repositorys.Dapper;
 using PrimeStore_API.Application.UnitOfWork;
+using PrimeStore_API.Persistence.Repositorys.Dapper;
 using System.Reflection;
 
 namespace PrimeStore_API.Persistence.IOC
@@ -16,8 +18,8 @@ namespace PrimeStore_API.Persistence.IOC
                     options.MigrationsAssembly(Assembly.GetAssembly(typeof(Persistence.Context.ApplicationContext)).GetName().Name);
                 })
             );
-            
 
+            services.AddScoped(typeof(IDapperRepository<>), typeof(DapperRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
         }
     }

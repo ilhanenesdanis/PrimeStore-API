@@ -1,7 +1,9 @@
-﻿using PrimeStore_API.Domanin.Entities.BaseClass;
+﻿using Dapper.Contrib.Extensions;
+using PrimeStore_API.Domanin.Entities.BaseClass;
 
 namespace PrimeStore_API.Domanin.Entities
 {
+    [Table("ProductStocks")]
     public class ProductStock:BaseEntity
     {
         public string UniqProductId { get; set; }

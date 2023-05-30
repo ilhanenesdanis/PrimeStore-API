@@ -1,7 +1,9 @@
-﻿using PrimeStore_API.Domanin.Entities.BaseClass;
+﻿using Dapper.Contrib.Extensions;
+using PrimeStore_API.Domanin.Entities.BaseClass;
 
 namespace PrimeStore_API.Domanin.Entities
 {
+    [Table("MediaLibraryFiles")]
     public class MediaLibraryFile : BaseEntity
     {
         public string FileName { get; set; }

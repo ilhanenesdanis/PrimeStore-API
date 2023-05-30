@@ -1,8 +1,10 @@
-﻿using PrimeStore_API.Domanin.Entities.BaseClass;
+﻿using Dapper.Contrib.Extensions;
+using PrimeStore_API.Domanin.Entities.BaseClass;
 using PrimeStore_API.Domanin.Enums;
 
 namespace PrimeStore_API.Domanin.Entities
 {
+    [Table("Products")]
     public class Product : BaseEntity
     {
         public string ParentProductId { get; set; }
