@@ -33,7 +33,7 @@ namespace PrimeStore_API.Persistence.Repositorys.Dapper
                 if (Pagination != null)
                     query = ToPaged(Pagination, query);
 
-                
+
 
 
 
@@ -41,24 +41,6 @@ namespace PrimeStore_API.Persistence.Repositorys.Dapper
                 return await connection.QueryAsync<T>(query);
             }
         }
-        public async Task<IEnumerable<object>> GetAllDynamicAsync(string query)
-        {
-            using (IDbConnection connection = Connection)
-            {
-                connection.Open();
-                return await connection.QueryAsync<object>(query);
-            }
-        }
-
-        public async Task<object> GetByDynamicAsync(string query)
-        {
-            using (IDbConnection connection = Connection)
-            {
-                connection.Open();
-                return await connection.QueryFirstOrDefaultAsync<object>(query);
-            }
-        }
-
         public async Task<IEnumerable<T>> GetByAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> selectColumns = null, string orderByColumn = null, bool ascending = true, Pagination Pagination = null)
         {
             using (IDbConnection conn = Connection)
